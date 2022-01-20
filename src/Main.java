@@ -10,6 +10,13 @@ public class Main {
         int priceOfPaintPerLitre = 5;
         int paintCoveragePerLitre = 10;
         int numberOfCoatings = 3;
+        int paintCode = 1;
+        String paintColour = switch (paintCode) {
+            case 1 -> "Blue";
+            case 2 -> "Red";
+            case 3 -> "Yellow";
+            default -> "White";
+        };
 
         int wall1Height = (int) (1 + Math.random()*5);
         int wall1Length = (int) (1 + Math.random()*10);
@@ -41,6 +48,7 @@ public class Main {
         System.out.println("Paint Brand: " + paintBrand);
         System.out.println("Client Name: " + clientFirstName + " " + clientLastname);
         System.out.println(ladderRequired);
+        System.out.println("Paint Colour: " + paintColour.toUpperCase());
         System.out.println("Area of Wall 1: " + wall1Area + " metres squared");
         System.out.println("Area of Wall 2: " + wall2Area + " metres squared");
         System.out.println("Total Area: " + totalWallsArea + " metres squared" );
