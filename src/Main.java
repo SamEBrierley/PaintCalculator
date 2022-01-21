@@ -11,34 +11,37 @@ public class Main {
         int priceOfPaintPerLitre = 5;
         int paintCoveragePerLitre = 10;
         int numberOfCoatings = 3;
-        int paintCode = 1;
+        int paintCode = (int)(1 + Math.random()*5);
         String paintColour = switch (paintCode) {
             case 1 -> "Blue";
             case 2 -> "Red";
             case 3 -> "Yellow";
+            case 4 -> "Black";
             default -> "White";
         };
 
-        int wall1Height = (int) (1 + Math.random()*5);
-        int wall1Length = (int) (1 + Math.random()*10);
-        int wall1Area = wall1Height * wall1Length;
-
-        int wall2Height = (int) (1 + Math.random()*5);
-        int wall2Length = (int) (1 + Math.random()*8);
-        int wall2Area = wall2Height * wall2Length;
-
+        int[] wallHeights = {(int) (1 + Math.random()*5), (int) (1 + Math.random()*5),
+                (int) (1 + Math.random()*5) , (int) (1 + Math.random()*5)};
+        int[] wallLengths = {(int) (1 + Math.random()*10), (int) (1 + Math.random()*10),
+                (int) (1 + Math.random()*10) , (int) (1 + Math.random()*10)};
+        int[] wallAreas ={0,0,0,0};
+        int oneWallArea = 0;
+        /*
         String ladderRequired = (wall1Height > 2||wall2Height > 2) ? ("A ladder is needed") : ("A ladder is not needed");
-
+        */
         double doorHeight = 0;
         double doorLength = 0;
 
         do{
             doorHeight = (Math.random()*4);
-        } while (doorHeight >= wall1Height  || doorHeight >= wall2Height);
+        } while (doorHeight >= wallHeights[0]  || doorHeight >= wallHeights[1] ||
+                doorHeight >= wallHeights[2]  || doorHeight >= wallHeights[3]);
 
         do{
             doorLength = (Math.random()*2);
-        }while (doorLength >= wall1Length  || doorLength >= wall2Length);
+        } while (doorLength >= wallLengths[0]  || doorLength >= wallLengths[1] ||
+                doorLength >= wallLengths[2]  || doorLength >= wallLengths[3]);
+
 
         double doorArea = doorHeight * doorLength;
 
@@ -47,19 +50,24 @@ public class Main {
 
         do{
             windowHeight = (Math.random()*4);
-        } while (windowHeight >= wall1Height || windowHeight >= wall2Height);
+        } while (windowHeight >= wallHeights[0] || windowHeight >= wallHeights[1] ||
+                windowHeight >= wallHeights[2] || windowHeight >= wallHeights[3]);
 
         do{
             windowLength = (Math.random()*4);
-        }while(windowLength >= wall1Length || windowLength >= wall2Length);
+        }while(windowLength >= wallLengths[0] || windowLength >= wallLengths[1] ||
+                windowLength >= wallLengths[2] || windowLength >= wallLengths[3]);
 
-        System.out.println("");
-        System.out.println(windowHeight);
-        System.out.println(windowLength);
 
         double windowArea = windowHeight * windowLength;
 
-        int totalWallsArea = wall1Area + wall2Area;
+        int totalWallsArea =0;
+        System.out.println(wallHeights.length);
+        for (int i =0; i < wallHeights.length; i++){
+            oneWallArea = wallHeights[i] * wallLengths[i];
+            totalWallsArea = totalWallsArea + oneWallArea;
+            wallAreas[i] = oneWallArea;
+        }
         double totalBlankSpace = doorArea + windowArea;
         double totalCoatingArea = (totalWallsArea - totalBlankSpace) * numberOfCoatings;
 
@@ -67,23 +75,25 @@ public class Main {
         double wholePaintBucketsNeeded = Math.ceil(paintBucketsNeeded);
         double totalPriceOfPaint = wholePaintBucketsNeeded * priceOfPaintPerLitre;
 
+        System.out.println("--------- Cheap Pete's Penny Pinching Painting -------------");
         System.out.println("---------Client-----------");
         System.out.println("Client Name: " + clientFirstName + " " + clientLastname);
-        System.out.println("");
+        System.out.println();
         System.out.println("---------Paint------------");
         System.out.println("Paint Brand: " + paintBrand);
         System.out.println("Paint Colour: " + paintColour.toUpperCase());
-        System.out.println("");
+        System.out.println();
         System.out.println("---------Walls------------");
-        System.out.println("Area of Wall 1: " + wall1Area + " metres squared");
-        System.out.println("Area of Wall 2: " + wall2Area + " metres squared");
+        for (int i=0; i<wallHeights.length;i++){
+            System.out.println("Area of Wall " + (i + 1) + ": " + wallAreas[i] + " metres squared");
+        }
         System.out.println("Total Area: " + totalWallsArea + " metres squared" );
-        System.out.println("");
+        System.out.println();
         System.out.println("------No Paint Area--------");
         System.out.println("Area of Window: " + windowArea + " metres squared");
         System.out.println("Area of Door: " + doorArea + " metres squared");
         System.out.println("Total Void Area: " + totalBlankSpace + " metres squared" );
-        System.out.println("");
+        System.out.println();
         System.out.println("----------Totals-----------");
         System.out.println("Total area of coatings: " + totalCoatingArea);
         System.out.println("Number of paint buckets needed: " + wholePaintBucketsNeeded);
@@ -95,8 +105,8 @@ public class Main {
         } else {
             System.out.println("You are within Budget");
         }
-        System.out.println("");
+        System.out.println();
         System.out.println("-----------Misc-------------");
-        System.out.println(ladderRequired);
+        //System.out.println(ladderRequired);
     }
 }
