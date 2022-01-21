@@ -27,7 +27,7 @@ public class Main {
         int priceOfPaintPerLitre = 5;
         int paintCoveragePerLitre = 10;
         int numberOfCoatings = 3;
-        int paintCode = (int)(1 + Math.random()*5);
+        int paintCode = randomiser(1,5);
 
         String paintColour = switch (paintCode) {
             case 1 -> "Blue";
@@ -44,9 +44,15 @@ public class Main {
 
         int[] wallAreas ={0,0,0,0};
         int oneWallArea = 0;
-        /*
-        String ladderRequired = (wall1Height > 2||wall2Height > 2) ? ("A ladder is needed") : ("A ladder is not needed");
-        */
+        boolean ladderRequired = false;
+
+        for (int i = 0; i<wallHeights.length;i++){
+            if (wallHeights[i] > 2){
+                ladderRequired = true;
+            }
+        }
+        String ladderMessage = (ladderRequired == true) ? ("A ladder is needed") : ("A ladder is not needed");
+
         double doorHeight = 0;
         double doorLength = 0;
 
@@ -59,7 +65,6 @@ public class Main {
             doorLength = (Math.random()*2);
         } while (doorLength >= wallLengths[0]  || doorLength >= wallLengths[1] ||
                 doorLength >= wallLengths[2]  || doorLength >= wallLengths[3]);
-
 
         double doorArea = doorHeight * doorLength;
 
@@ -125,6 +130,6 @@ public class Main {
         }
         System.out.println();
         System.out.println("-----------Misc-------------");
-        //System.out.println(ladderRequired);
+        System.out.println(ladderMessage);
     }
 }
