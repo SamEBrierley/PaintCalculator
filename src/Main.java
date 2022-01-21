@@ -1,4 +1,20 @@
 public class Main {
+
+    public static int randomiser(int minimumValue, int scale){
+        return (int) (minimumValue + Math.random()*scale);
+    }
+/*
+    public static double sizeComparison(double measurementOne, double measurementTwo){
+        double smallestMeasurement;
+        if (measurementOne > measurementTwo)
+        {
+            smallestMeasurement = measurementTwo;
+        }else{
+            smallestMeasurement = measurementOne;
+        }
+        return smallestMeasurement;
+    }
+*/
     public static void main (String[] args){
         String paintBrand = "Dulux";
         paintBrand = paintBrand.toUpperCase();
@@ -12,6 +28,7 @@ public class Main {
         int paintCoveragePerLitre = 10;
         int numberOfCoatings = 3;
         int paintCode = (int)(1 + Math.random()*5);
+
         String paintColour = switch (paintCode) {
             case 1 -> "Blue";
             case 2 -> "Red";
@@ -20,10 +37,11 @@ public class Main {
             default -> "White";
         };
 
-        int[] wallHeights = {(int) (1 + Math.random()*5), (int) (1 + Math.random()*5),
-                (int) (1 + Math.random()*5) , (int) (1 + Math.random()*5)};
-        int[] wallLengths = {(int) (1 + Math.random()*10), (int) (1 + Math.random()*10),
-                (int) (1 + Math.random()*10) , (int) (1 + Math.random()*10)};
+        int[] wallHeights = {randomiser(1,5), randomiser(1,5),
+                randomiser(1,5),randomiser(1,5)};
+        int[] wallLengths = {randomiser(1,10), randomiser(1,10),
+                randomiser(1,10),randomiser(1,10)};
+
         int[] wallAreas ={0,0,0,0};
         int oneWallArea = 0;
         /*
